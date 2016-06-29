@@ -1,0 +1,16 @@
+<button type="button" class="btn btn-default" (click)="modalSize = null; modal.show()">Open me!</button>
+<button type="button" class="btn btn-default" (click)="modalSize = 'lg'; modal.show()">Large modal</button>
+<button type="button" class="btn btn-default" (click)="modalSize = 'sm'; modal.show()">Small modal</button>
+
+<div *ngIf="selectedItem">Selection from a modal: <b>{{selectedItem}}</b></div>
+
+<modal #modal titleText="I'm a modal!" [modalSize]="modalSize">
+    <template #modalContent>
+        <ul>
+            <li *ngFor="let item of items">
+                <a href="#" (click)="selectedItem = item">{{ item }}</a>
+            </li>
+        </ul>
+        Selected: <b>{{ selectedItem }}</b>
+    </template>
+</modal>

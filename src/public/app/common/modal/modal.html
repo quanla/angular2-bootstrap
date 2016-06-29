@@ -1,0 +1,43 @@
+<div class="modal fade" *ngIf="visible"
+     [class.modal-warning]="modalType == 'warning'"
+     (click)="(outsideModalDialog($event) && dismiss()) || true" (keydown.escape)="dismiss()">
+    <div class="modal-dialog"
+         [class.modal-lg]="modalSize == 'lg'"
+         [class.modal-sm]="modalSize == 'sm'"
+    >
+        <div class="modal-content">
+            <div class="modal-header">
+                <modalPh #header="modalPh"></modalPh>
+
+                <div *ngIf="headerC == null">
+                    <button type="button" class="close" (click)="dismiss()">
+                        <span aria-hidden="true">×</span>
+                    </button>
+
+                    <h4 class="modal-title">{{titleText}}</h4>
+                </div>
+            </div>
+            <div class="modal-body">
+                <modalPh #content="modalPh"></modalPh>
+            </div>
+            <div class="modal-footer">
+                <modalPh #footer="modalPh"></modalPh>
+
+                <div *ngIf="footerC == null">
+                    <button class="btn pull-left cancel"
+                            [class.btn-outline]="modalType != null" [class.btn-default]="modalType == null"
+                            (click)="dismiss()"
+                    >{{dismissText}}</button>
+
+                    <button class="btn main-action" [class.btn-outline]="modalType != null" [class.btn-primary]="modalType == null"
+                            (click)="close()"
+                    >{{closeText}}</button>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<div class="modal-backdrop fade" *ngIf="visible"></div>

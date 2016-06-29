@@ -6,16 +6,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 const core_1 = require("@angular/core");
-let SimpleModalSampleComponent = class SimpleModalSampleComponent {
+const modal_1 = require("../../common/modal/modal");
+let ModalSampleComponent = class ModalSampleComponent {
     constructor() {
+        this.items = ['item1', 'item2', 'item3'];
     }
 };
-SimpleModalSampleComponent = __decorate([
+ModalSampleComponent = __decorate([
     core_1.Component({
-        selector: "simple-modal-sample",
-        templateUrl: "app/samples/simple-modal-sample.html",
-        directives: []
+        selector: "modal-sample",
+        templateUrl: "app/samples/modal/modal-sample.html",
+        directives: [modal_1.ModalComponent]
     })
-], SimpleModalSampleComponent);
-exports.SimpleModalSampleComponent = SimpleModalSampleComponent;
-//# sourceMappingURL=simple-modal-sample.js.map
+], ModalSampleComponent);
+exports.ModalSampleComponent = ModalSampleComponent;
+//# sourceMappingURL=modal-sample.js.map

@@ -1,42 +1,16 @@
 <section id="modal">
     <div class="page-header">
         <h1>Modal
-            <small>
-                (<a target="_blank" href="https://github.com/angular-ui/bootstrap/tree/master/src/modal">ui.bootstrap.modal</a>)
-            </small>
+            <!--<small>-->
+                <!--(<a target="_blank" href="https://github.com/angular-ui/bootstrap/tree/master/src/modal">ui.bootstrap.modal</a>)-->
+            <!--</small>-->
         </h1>
     </div>
     <div class="row">
         <div class="col-md-6 show-grid">
-            <div ng-controller="ModalDemoCtrl" class="ng-scope">
-                <script type="text/ng-template" id="myModalContent.html">
-                    <div class="modal-header">
-                        <h3 class="modal-title">I'm a modal!</h3>
-                    </div>
-                    <div class="modal-body">
-                        <ul>
-                            <li ng-repeat="item in items">
-                                <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
-                            </li>
-                        </ul>
-                        Selected: <b>{{ selected.item }}</b>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
-                        <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
-                    </div>
-                </script>
-
-                <button type="button" class="btn btn-default" ng-click="open()">Open me!</button>
-                <button type="button" class="btn btn-default" ng-click="open('lg')">Large modal</button>
-                <button type="button" class="btn btn-default" ng-click="open('sm')">Small modal</button>
-                <button type="button" class="btn btn-default ng-binding" ng-click="toggleAnimation()">Toggle Animation
-                    (false)
-                </button>
-                <div ng-show="selected" class="ng-binding" style="">Selection from a modal: item1</div>
-            </div>
+            <modal-sample></modal-sample>
         </div>
-        <div class="col-md-6">
+        <!--<div class="col-md-6">
             <p><code>$uibModal</code> is a service to create modal windows.
                 Creating modals is straightforward: create a template, a controller and reference them when using <code>$uibModal</code>.
             </p>
@@ -200,10 +174,10 @@
             <p>When the modal is opened with a controller, a <code>$resolve</code> object is exposed on the template
                 with the resolved values from the resolve object.</p>
 
-        </div>
+        </div>-->
     </div>
     <hr>
-    <div class="row code">
+    <!--<div class="row code">
         <div class="col-md-12 ng-scope" ng-controller="PlunkerCtrl">
             <div class="pull-right">
                 <button type="button" class="btn btn-info plunk-btn"
@@ -224,7 +198,7 @@
                     </li>
                 </ul>
                 <div class="tab-content">
-                    <!-- ngRepeat: tab in tabset.tabs -->
+                    &lt;!&ndash; ngRepeat: tab in tabset.tabs &ndash;&gt;
                     <div class="tab-pane ng-scope active" ng-repeat="tab in tabset.tabs"
                          ng-class="{active: tabset.active === tab.index}" uib-tab-content-transclude="tab" style="">
 
@@ -373,7 +347,7 @@
                                                         class="support tag-name">div</span></span><span
                                                         class="support tag cclose">&gt;</span></code></pre>
                         </div>
-                    </div><!-- end ngRepeat: tab in tabset.tabs -->
+                    </div>&lt;!&ndash; end ngRepeat: tab in tabset.tabs &ndash;&gt;
                     <div class="tab-pane ng-scope" ng-repeat="tab in tabset.tabs"
                          ng-class="{active: tabset.active === tab.index}" uib-tab-content-transclude="tab" style="">
 
@@ -454,9 +428,9 @@
                                                 });
                                             </code></pre>
                         </div>
-                    </div><!-- end ngRepeat: tab in tabset.tabs -->
+                    </div>&lt;!&ndash; end ngRepeat: tab in tabset.tabs &ndash;&gt;
                 </div>
             </div>
         </div>
-    </div>
+    </div>-->
 </section>
