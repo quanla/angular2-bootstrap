@@ -1,0 +1,462 @@
+<section id="modal">
+    <div class="page-header">
+        <h1>Modal
+            <small>
+                (<a target="_blank" href="https://github.com/angular-ui/bootstrap/tree/master/src/modal">ui.bootstrap.modal</a>)
+            </small>
+        </h1>
+    </div>
+    <div class="row">
+        <div class="col-md-6 show-grid">
+            <div ng-controller="ModalDemoCtrl" class="ng-scope">
+                <script type="text/ng-template" id="myModalContent.html">
+                    <div class="modal-header">
+                        <h3 class="modal-title">I'm a modal!</h3>
+                    </div>
+                    <div class="modal-body">
+                        <ul>
+                            <li ng-repeat="item in items">
+                                <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
+                            </li>
+                        </ul>
+                        Selected: <b>{{ selected.item }}</b>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+                        <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+                    </div>
+                </script>
+
+                <button type="button" class="btn btn-default" ng-click="open()">Open me!</button>
+                <button type="button" class="btn btn-default" ng-click="open('lg')">Large modal</button>
+                <button type="button" class="btn btn-default" ng-click="open('sm')">Small modal</button>
+                <button type="button" class="btn btn-default ng-binding" ng-click="toggleAnimation()">Toggle Animation
+                    (false)
+                </button>
+                <div ng-show="selected" class="ng-binding" style="">Selection from a modal: item1</div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <p><code>$uibModal</code> is a service to create modal windows.
+                Creating modals is straightforward: create a template, a controller and reference them when using <code>$uibModal</code>.
+            </p>
+
+            <p>The <code>$uibModal</code> service has only one method: <code>open(options)</code>.</p>
+
+            <h3 id="-uibmodal-s-open-function">$uibModal's open function</h3>
+            <h4 id="options-parameter">options parameter</h4>
+            <ul>
+                <li><p><code>animation</code>
+                    <em>(Type: <code>boolean</code>, Default: <code>true</code>)</em> -
+                    Set to false to disable animations on new modal/backdrop. Does not toggle animations for
+                    modals/backdrops that are already displayed.</p>
+                </li>
+                <li><p><code>appendTo</code>
+                    <em>(Type: <code>angular.element</code>, Default: <code>body</code>: Example: <code>$document.find('aside').eq(0)</code>)</em>
+                    -
+                    Appends the modal to a specific element.</p>
+                </li>
+                <li><p><code>backdrop</code>
+                    <em>(Type: <code>boolean|string</code>, Default: <code>true</code>)</em> -
+                    Controls presence of a backdrop. Allowed values: <code>true</code> (default), <code>false</code> (no
+                    backdrop), <code>'static'</code> (disables modal closing by click on the backdrop).</p>
+                </li>
+                <li><p><code>backdropClass</code>
+                    <em>(Type: <code>string</code>)</em> -
+                    Additional CSS class(es) to be added to a modal backdrop template.</p>
+                </li>
+                <li><p><code>bindToController</code>
+                    <em>(Type: <code>boolean</code>, Default: <code>false</code>)</em> -
+                    When used with <code>controllerAs</code> &amp; set to <code>true</code>, it will bind the $scope
+                    properties onto the controller.</p>
+                </li>
+                <li><p><code>controller</code>
+                    <em>(Type: <code>function|string|array</code>, Example: <code>MyModalController</code>)</em> -
+                    A controller for the modal instance, either a controller name as a string, or an inline controller
+                    function, optionally wrapped in array notation for dependency injection. Allows the controller-as
+                    syntax. Has a special <code>$uibModalInstance</code> injectable to access the modal instance.</p>
+                </li>
+                <li><p><code>controllerAs</code>
+                    <em>(Type: <code>string</code>, Example: <code>ctrl</code>)</em> -
+                    An alternative to the controller-as syntax. Requires the <code>controller</code> option to be
+                    provided as well.</p>
+                </li>
+                <li><p><code>keyboard</code> -
+                    <em>(Type: <code>boolean</code>, Default: <code>true</code>)</em> -
+                    Indicates whether the dialog should be closable by hitting the ESC key.</p>
+                </li>
+                <li><p><code>openedClass</code>
+                    <em>(Type: <code>string</code>, Default: <code>modal-open</code>)</em> -
+                    Class added to the <code>body</code> element when the modal is opened.</p>
+                </li>
+                <li><p><code>resolve</code>
+                    <em>(Type: <code>Object</code>)</em> -
+                    Members that will be resolved and passed to the controller as locals; it is equivalent of the <code>resolve</code>
+                    property in the router.</p>
+                </li>
+                <li><p><code>scope</code>
+                    <em>(Type: <code>$scope</code>)</em> -
+                    The parent scope instance to be used for the modal's content. Defaults to <code>$rootScope</code>.
+                </p>
+                </li>
+                <li><p><code>size</code>
+                    <em>(Type: <code>string</code>, Example: <code>lg</code>)</em> -
+                    Optional suffix of modal window class. The value used is appended to the <code>modal-</code> class,
+                    i.e. a value of <code>sm</code> gives <code>modal-sm</code>.</p>
+                </li>
+                <li><p><code>template</code>
+                    <em>(Type: <code>string</code>)</em> -
+                    Inline template representing the modal's content.</p>
+                </li>
+                <li><p><code>templateUrl</code>
+                    <em>(Type: <code>string</code>)</em> -
+                    A path to a template representing modal's content. You need either a <code>template</code> or <code>templateUrl</code>.
+                </p>
+                </li>
+                <li><p><code>windowClass</code>
+                    <em>(Type: <code>string</code>)</em> -
+                    Additional CSS class(es) to be added to a modal window template.</p>
+                </li>
+                <li><p><code>windowTemplateUrl</code>
+                    <em>(Type: <code>string</code>, Default: <code>uib/template/modal/window.html</code>)</em> -
+                    A path to a template overriding modal's window template.</p>
+                </li>
+                <li><p><code>windowTopClass</code>
+                    <em>(Type: <code>string</code>)</em> -
+                    CSS class(es) to be added to the top modal window.</p>
+                </li>
+            </ul>
+            <p>Global defaults may be set for <code>$uibModal</code> via <code>$uibModalProvider.options</code>.</p>
+            <h4 id="return">return</h4>
+
+            <p>The <code>open</code> method returns a modal instance, an object with the following properties:</p>
+            <ul>
+                <li><p><code>close(result)</code>
+                    <em>(Type: <code>function</code>)</em> -
+                    Can be used to close a modal, passing a result.</p>
+                </li>
+                <li><p><code>dismiss(reason)</code>
+                    <em>(Type: <code>function</code>)</em> -
+                    Can be used to dismiss a modal, passing a reason.</p>
+                </li>
+                <li><p><code>result</code>
+                    <em>(Type: <code>promise</code>)</em> -
+                    Is resolved when a modal is closed and rejected when a modal is dismissed.</p>
+                </li>
+                <li><p><code>opened</code>
+                    <em>(Type: <code>promise</code>)</em> -
+                    Is resolved when a modal gets opened after downloading content's template and resolving all
+                    variables.</p>
+                </li>
+                <li><p><code>closed</code>
+                    <em>(Type: <code>promise</code>)</em> -
+                    Is resolved when a modal is closed and the animation completes.</p>
+                </li>
+                <li><p><code>rendered</code>
+                    <em>(Type: <code>promise</code>)</em> -
+                    Is resolved when a modal is rendered. </p>
+                </li>
+            </ul>
+            <hr>
+            <p>The scope associated with modal's content is augmented with:</p>
+            <ul>
+                <li><p><code>$close(result)</code>
+                    <em>(Type: <code>function</code>)</em> -
+                    A method that can be used to close a modal, passing a result.</p>
+                </li>
+                <li><p><code>$dismiss(reason)</code>
+                    <em>(Type: <code>function</code>)</em> -
+                    A method that can be used to dismiss a modal, passing a reason.</p>
+                </li>
+            </ul>
+            <p>Those methods make it easy to close a modal window without a need to create a dedicated controller.</p>
+
+            <p>Also, when using <code>bindToController</code>, you can define an <code>$onInit</code> method in the
+                controller that will fire upon initialization.</p>
+            <hr>
+            <p>Events fired:</p>
+            <ul>
+                <li><p><code>$uibUnscheduledDestruction</code> -
+                    This event is fired if the $scope is destroyed via unexpected mechanism, such as it being passed in
+                    the modal options and a $route/$state transition occurs. The modal will also be dismissed.</p>
+                </li>
+                <li><p><code>modal.closing</code> -
+                    This event is broadcast to the modal scope before the modal closes. If the listener calls
+                    preventDefault() on the event, then the modal will remain open.
+                    Also, the <code>$close</code> and <code>$dismiss</code> methods returns true if the event was
+                    executed. This event also includes a parameter for the result/reason and a boolean that indicates
+                    whether the modal is being closed (true) or dismissed.</p>
+                </li>
+            </ul>
+            <h5 id="ui-router-resolves">UI Router resolves</h5>
+
+            <p>If one wants to have the modal resolve using <a href="https://github.com/angular-ui/ui-router">UI
+                Router's</a> pre-1.0 resolve mechanism, one can call <code>$uibResolve.setResolver('$resolve')</code> in
+                the configuration phase of the application. One can also provide a custom resolver as well, as long as
+                the signature conforms to UI Router's <a
+                        href="http://angular-ui.github.io/ui-router/site/#/api/ui.router.util.$resolve">$resolve</a>.
+            </p>
+
+            <p>When the modal is opened with a controller, a <code>$resolve</code> object is exposed on the template
+                with the resolved values from the resolve object.</p>
+
+        </div>
+    </div>
+    <hr>
+    <div class="row code">
+        <div class="col-md-12 ng-scope" ng-controller="PlunkerCtrl">
+            <div class="pull-right">
+                <button type="button" class="btn btn-info plunk-btn"
+                        ng-click="edit('1.5.3', '3.3.6', '1.3.3', 'modal')"><i class="glyphicon glyphicon-edit"></i>
+                    Edit in plunker
+                </button>
+            </div>
+            <div active="activeTab" class="ng-isolate-scope">
+                <ul class="nav nav-tabs" ng-class="{'nav-stacked': vertical, 'nav-justified': justified}"
+                    ng-transclude="">
+                    <li ng-class="[{active: active, disabled: disabled}, classes]"
+                        class="uib-tab nav-item ng-scope ng-isolate-scope active" index="0" heading="Markup" style="">
+                        <a href="" ng-click="select($event)" class="nav-link ng-binding" uib-tab-heading-transclude="">Markup</a>
+                    </li>
+                    <li ng-class="[{active: active, disabled: disabled}, classes]"
+                        class="uib-tab nav-item ng-scope ng-isolate-scope" index="1" heading="JavaScript" style="">
+                        <a href="" ng-click="select($event)" class="nav-link ng-binding" uib-tab-heading-transclude="">JavaScript</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <!-- ngRepeat: tab in tabset.tabs -->
+                    <div class="tab-pane ng-scope active" ng-repeat="tab in tabset.tabs"
+                         ng-class="{active: tabset.active === tab.index}" uib-tab-content-transclude="tab" style="">
+
+                        <div plunker-content="markup" class="ng-scope">
+                                            <pre ng-non-bindable=""><code data-language="html" class="rainbow"><span
+                                                    class="support tag"><span class="support tag">&lt;</span><span
+                                                    class="support tag-name">div</span></span> <span
+                                                    class="support attribute">ng-controller</span><span
+                                                    class="support operator">=</span><span class="string quote">"</span><span
+                                                    class="string value">ModalDemoCtrl</span><span class="string quote">"</span><span
+                                                    class="support tag cclose">&gt;</span>
+    <span class="source js embedded"><span class="support tag script">&lt;</span><span
+            class="entity tag script">script</span> <span class="entity tag script">type</span>=<span class="string">"text/ng-template"</span> <span
+            class="entity tag script">id</span>=<span class="string">"myModalContent.html"</span><span
+            class="support tag script">&gt;</span>
+        <span class="keyword operator">&lt;</span>div <span class="keyword">class</span><span
+                class="keyword operator">=</span><span class="string">"modal-header"</span><span
+                class="keyword operator">&gt;</span>
+            <span class="keyword operator">&lt;</span>h3 <span class="keyword">class</span><span
+                class="keyword operator">=</span><span class="string">"modal-title"</span><span
+                class="keyword operator">&gt;</span>I'm a modal<span class="keyword operator">!</span><span
+                class="keyword operator">&lt;</span>/h3<span class="keyword operator">&gt;</span>
+        <span class="keyword operator">&lt;</span>/div<span class="keyword operator">&gt;</span>
+        <span class="keyword operator">&lt;</span>div <span class="keyword">class</span><span
+                class="keyword operator">=</span><span class="string">"modal-body"</span><span class="keyword operator">&gt;</span>
+            <span class="keyword operator">&lt;</span>ul<span class="keyword operator">&gt;</span>
+                <span class="keyword operator">&lt;</span>li ng<span class="keyword operator">-</span>repeat<span
+                class="keyword operator">=</span><span class="string">"item in items"</span><span
+                class="keyword operator">&gt;</span>
+                    <span class="keyword operator">&lt;</span>a href<span class="keyword operator">=</span><span
+                class="string">"#"</span> ng<span class="keyword operator">-</span>click<span
+                class="keyword operator">=</span><span
+                class="string">"$event.preventDefault(); selected.item = item"</span><span
+                class="keyword operator">&gt;</span>{{ item }}<span class="keyword operator">&lt;</span>/a<span
+                class="keyword operator">&gt;</span>
+                <span class="keyword operator">&lt;</span>/li<span class="keyword operator">&gt;</span>
+            <span class="keyword operator">&lt;</span>/ul<span class="keyword operator">&gt;</span>
+            Selected: <span class="keyword operator">&lt;</span>b<span class="keyword operator">&gt;</span>{{ selected.item }}<span
+                class="keyword operator">&lt;</span>/b<span class="keyword operator">&gt;</span>
+        <span class="keyword operator">&lt;</span>/div<span class="keyword operator">&gt;</span>
+        <span class="keyword operator">&lt;</span>div <span class="keyword">class</span><span
+                class="keyword operator">=</span><span class="string">"modal-footer"</span><span
+                class="keyword operator">&gt;</span>
+            <span class="keyword operator">&lt;</span>button <span class="keyword">class</span><span
+                class="keyword operator">=</span><span class="string">"btn btn-primary"</span> type<span
+                class="keyword operator">=</span><span class="string">"button"</span> ng<span
+                class="keyword operator">-</span>click<span class="keyword operator">=</span><span
+                class="string">"ok()"</span><span class="keyword operator">&gt;</span>OK<span class="keyword operator">&lt;</span>/button<span
+                class="keyword operator">&gt;</span>
+            <span class="keyword operator">&lt;</span>button <span class="keyword">class</span><span
+                class="keyword operator">=</span><span class="string">"btn btn-warning"</span> type<span
+                class="keyword operator">=</span><span class="string">"button"</span> ng<span
+                class="keyword operator">-</span>click<span class="keyword operator">=</span><span class="string">"cancel()"</span><span
+                class="keyword operator">&gt;</span>Cancel<span class="keyword operator">&lt;</span>/button<span
+                class="keyword operator">&gt;</span>
+        <span class="keyword operator">&lt;</span>/div<span class="keyword operator">&gt;</span>
+    <span class="support tag script">&lt;/</span><span class="entity tag script">script</span><span
+                class="support tag script">&gt;</span></span>
+
+                                                <span class="support tag"><span class="support tag">&lt;</span><span
+                                                        class="support tag-name">button</span></span> <span
+                                                        class="support attribute">type</span><span
+                                                        class="support operator">=</span><span
+                                                        class="string quote">"</span><span
+                                                        class="string value">button</span><span
+                                                        class="string quote">"</span> <span class="support attribute">class</span><span
+                                                        class="support operator">=</span><span
+                                                        class="string quote">"</span><span class="string value">btn btn-default</span><span
+                                                        class="string quote">"</span> <span class="support attribute">ng-click</span><span
+                                                        class="support operator">=</span><span
+                                                        class="string quote">"</span><span
+                                                        class="string value">open()</span><span
+                                                        class="string quote">"</span><span class="support tag cclose">&gt;</span>Open
+                                                me!<span class="support tag"><span class="support tag">&lt;</span><span
+                                                        class="support tag special">/</span><span
+                                                        class="support tag-name">button</span></span><span
+                                                        class="support tag cclose">&gt;</span>
+                                                <span class="support tag"><span class="support tag">&lt;</span><span
+                                                        class="support tag-name">button</span></span> <span
+                                                        class="support attribute">type</span><span
+                                                        class="support operator">=</span><span
+                                                        class="string quote">"</span><span
+                                                        class="string value">button</span><span
+                                                        class="string quote">"</span> <span class="support attribute">class</span><span
+                                                        class="support operator">=</span><span
+                                                        class="string quote">"</span><span class="string value">btn btn-default</span><span
+                                                        class="string quote">"</span> <span class="support attribute">ng-click</span><span
+                                                        class="support operator">=</span><span
+                                                        class="string quote">"</span><span class="string value">open('lg')</span><span
+                                                        class="string quote">"</span><span class="support tag cclose">&gt;</span>Large
+                                                modal<span class="support tag"><span
+                                                        class="support tag">&lt;</span><span
+                                                        class="support tag special">/</span><span
+                                                        class="support tag-name">button</span></span><span
+                                                        class="support tag cclose">&gt;</span>
+                                                <span class="support tag"><span class="support tag">&lt;</span><span
+                                                        class="support tag-name">button</span></span> <span
+                                                        class="support attribute">type</span><span
+                                                        class="support operator">=</span><span
+                                                        class="string quote">"</span><span
+                                                        class="string value">button</span><span
+                                                        class="string quote">"</span> <span class="support attribute">class</span><span
+                                                        class="support operator">=</span><span
+                                                        class="string quote">"</span><span class="string value">btn btn-default</span><span
+                                                        class="string quote">"</span> <span class="support attribute">ng-click</span><span
+                                                        class="support operator">=</span><span
+                                                        class="string quote">"</span><span class="string value">open('sm')</span><span
+                                                        class="string quote">"</span><span class="support tag cclose">&gt;</span>Small
+                                                modal<span class="support tag"><span
+                                                        class="support tag">&lt;</span><span
+                                                        class="support tag special">/</span><span
+                                                        class="support tag-name">button</span></span><span
+                                                        class="support tag cclose">&gt;</span>
+                                                <span class="support tag"><span class="support tag">&lt;</span><span
+                                                        class="support tag-name">button</span></span> <span
+                                                        class="support attribute">type</span><span
+                                                        class="support operator">=</span><span
+                                                        class="string quote">"</span><span
+                                                        class="string value">button</span><span
+                                                        class="string quote">"</span> <span class="support attribute">class</span><span
+                                                        class="support operator">=</span><span
+                                                        class="string quote">"</span><span class="string value">btn btn-default</span><span
+                                                        class="string quote">"</span> <span class="support attribute">ng-click</span><span
+                                                        class="support operator">=</span><span
+                                                        class="string quote">"</span><span class="string value">toggleAnimation()</span><span
+                                                        class="string quote">"</span><span class="support tag cclose">&gt;</span>Toggle
+                                                Animation ({{ animationsEnabled }})<span class="support tag"><span
+                                                        class="support tag">&lt;</span><span
+                                                        class="support tag special">/</span><span
+                                                        class="support tag-name">button</span></span><span
+                                                        class="support tag cclose">&gt;</span>
+                                                <span class="support tag"><span class="support tag">&lt;</span><span
+                                                        class="support tag-name">div</span></span> <span
+                                                        class="support attribute">ng-show</span><span
+                                                        class="support operator">=</span><span
+                                                        class="string quote">"</span><span
+                                                        class="string value">selected</span><span
+                                                        class="string quote">"</span><span class="support tag cclose">&gt;</span>Selection
+                                                from a modal: {{ selected }}<span class="support tag"><span
+                                                        class="support tag">&lt;</span><span
+                                                        class="support tag special">/</span><span
+                                                        class="support tag-name">div</span></span><span
+                                                        class="support tag cclose">&gt;</span>
+                                                <span class="support tag"><span class="support tag">&lt;</span><span
+                                                        class="support tag special">/</span><span
+                                                        class="support tag-name">div</span></span><span
+                                                        class="support tag cclose">&gt;</span></code></pre>
+                        </div>
+                    </div><!-- end ngRepeat: tab in tabset.tabs -->
+                    <div class="tab-pane ng-scope" ng-repeat="tab in tabset.tabs"
+                         ng-class="{active: tabset.active === tab.index}" uib-tab-content-transclude="tab" style="">
+
+                        <div plunker-content="javascript" class="ng-scope">
+                                            <pre ng-non-bindable=""><code data-language="javascript" class="rainbow">angular.<span
+                                                    class="function call">module</span>(<span class="string">'ui.bootstrap.demo'</span>).<span
+                                                    class="function call">controller</span>(<span class="string">'ModalDemoCtrl'</span>,
+                                                <span class="storage function">function</span> ($scope, $uibModal, $log)
+                                                {
+
+                                                $scope.items <span class="keyword operator">=</span> [<span
+                                                        class="string">'item1'</span>, <span
+                                                        class="string">'item2'</span>, <span
+                                                        class="string">'item3'</span>];
+
+                                                $scope.animationsEnabled <span class="keyword operator">=</span> <span
+                                                        class="constant language">true</span>;
+
+                                                $scope.open <span class="keyword operator">=</span> <span
+                                                        class="storage function">function</span> (size) {
+
+                                                <span class="keyword">var</span> modalInstance <span
+                                                        class="keyword operator">=</span> $uibModal.<span
+                                                        class="function call">open</span>({
+                                                animation: $scope.animationsEnabled,
+                                                templateUrl: <span class="string">'myModalContent.html'</span>,
+                                                controller: <span class="string">'ModalInstanceCtrl'</span>,
+                                                size: size,
+                                                resolve: {
+                                                <span class="entity function">items</span>: <span
+                                                        class="storage function">function</span> () {
+                                                <span class="keyword">return</span> $scope.items;
+                                                }
+                                                }
+                                                });
+
+                                                modalInstance.result.<span class="keyword">then</span>(<span
+                                                        class="storage function">function</span> (selectedItem) {
+                                                $scope.selected <span class="keyword operator">=</span> selectedItem;
+                                                }, <span class="storage function">function</span> () {
+                                                $log.<span class="function call">info</span>(<span class="string">'Modal dismissed at: '</span>
+                                                <span class="keyword operator">+</span> <span class="keyword">new</span>
+                                                <span class="entity function">Date</span>());
+                                                });
+                                                };
+
+                                                $scope.toggleAnimation <span class="keyword operator">=</span> <span
+                                                        class="storage function">function</span> () {
+                                                $scope.animationsEnabled <span class="keyword operator">=</span> <span
+                                                        class="keyword operator">!</span>$scope.animationsEnabled;
+                                                };
+
+                                                });
+
+                                                <span class="comment">// Please note that $uibModalInstance represents a modal window (instance) dependency.</span>
+                                                <span class="comment">// It is not the same as the $uibModal service used above.</span>
+
+                                                angular.<span class="function call">module</span>(<span class="string">'ui.bootstrap.demo'</span>).<span
+                                                        class="function call">controller</span>(<span class="string">'ModalInstanceCtrl'</span>,
+                                                <span class="storage function">function</span> ($scope,
+                                                $uibModalInstance, items) {
+
+                                                $scope.items <span class="keyword operator">=</span> items;
+                                                $scope.selected <span class="keyword operator">=</span> {
+                                                item: $scope.items[<span class="constant numeric">0</span>]
+                                                };
+
+                                                $scope.ok <span class="keyword operator">=</span> <span
+                                                        class="storage function">function</span> () {
+                                                $uibModalInstance.<span class="function call">close</span>($scope.selected.item);
+                                                };
+
+                                                $scope.cancel <span class="keyword operator">=</span> <span
+                                                        class="storage function">function</span> () {
+                                                $uibModalInstance.<span class="function call">dismiss</span>(<span
+                                                        class="string">'cancel'</span>);
+                                                };
+                                                });
+                                            </code></pre>
+                        </div>
+                    </div><!-- end ngRepeat: tab in tabset.tabs -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
